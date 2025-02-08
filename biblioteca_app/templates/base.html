@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es-mx">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Biblioteca Pony|Inicio{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    {% block css %}{% endblock %}
+      <!-- Google Fonts -->
+     
+</head>
+<body>
+    <header class="header  text-white">
+        <nav class="navbar navbar-expand-lg ">
+            <div class="container-fluid">
+                <!-- Logo -->
+                <a href=" {% url 'inicio' %} " class="navbar-brand text-white">
+                    <img src="{% static 'images/Logo-Biblioteca.png' %}" alt="Logo" class="navbar-logo"> Biblioteca Pony
+             
+                </a>
+                
+                <!-- Botón de colapso -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Navegación -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href=" {% url 'inicio' %} "><i class="bi bi-house"></i>Inicio</a>
+                        </li>
+                        {% if user.is_authenticated %}
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="bi bi-book"></i> Mis Libros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="bi bi-clock-history"></i> Historial</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="bi bi-cart"></i> Carrito</a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'admin_material' %}"><i class="bi bi-journal-code"></i>Administrar Material</a>
+                        </li>
+
+
+
+                        {% endif %}
+                    </ul>
+
+                    <!-- Dropdown Usuario -->
+                    <div class="dropdown open ms-auto">
+                        <button
+                            class="btn btn-info dropdown-toggle text-white"
+                            type="button"
+                            id="triggerId"
+                            data-bs-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                        >
+                            <i class="bi bi-person-circle"></i> 
+                            {% if user.is_authenticated %}
+                                {{ user.username }} <!-- Muestra el nombre de usuario si está logueado -->
+                            {% else %}
+                                Login
+                            {% endif %}
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="triggerId">
+                            {% if user.is_authenticated %}
+                                <!-- Enlaces para usuarios logueados -->
+                                <li><a class="dropdown-item" href="#">Perfil</a></li>
+                                <li><a class="dropdown-item" href="#">Configuraciones</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                            {% else %}
+                                <!-- Enlaces para usuarios no logueados -->
+                                <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
+                                <li><a class="dropdown-item" href="{% url 'register' %}">Register</a></li>
+                            {% endif %}
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main container mt-4">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer text-center text-white py-3 mt-auto">
+        <div class="container">
+            <section class="mb-4">
+                <a class="btn btn-outline-light btn-floating m-1" href="#" role="button">
+                    <i class="bi bi-facebook"></i>
+                </a>
+                <a class="btn btn-outline-light btn-floating m-1" href="#" role="button">
+                    <i class="bi bi-instagram"></i>
+                </a>
+                <a class="btn btn-outline-light btn-floating m-1" href="#" role="button">
+                    <i class="bi bi-github"></i>
+                </a>
+            </section>
+            <div>&copy; 2024 Biblioteca Pony</div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    {% block js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}Biblioteca Pony | Inicio{% endblock %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">Biblioteca Pony</h2>
+    
+   <!-- Buscador -->
+<form method="GET" class="mb-4">
+    <div class="row">
+        <div class="col-md-4">
+            <input type="text" name="q" class="form-control" placeholder="Buscar por título o autor" value="{{ request.GET.q }}">
+        </div>
+        <div class="col-md-3">
+            <select name="tipo" class="form-control">
+                <option value="">Todos los tipos</option>
+                <option value="L" {% if request.GET.tipo == "L" %}selected{% endif %}>Libro</option>
+                <option value="R" {% if request.GET.tipo == "R" %}selected{% endif %}>Revista</option>
+                <option value="T" {% if request.GET.tipo == "T" %}selected{% endif %}>Tesis</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </div>
+    </div>
+</form>
+
+<!-- Mostrar libros -->
+<div class="row">
+    {% for material in materiales %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="{% if material.foto %}{{ material.foto.url }}{% else %}{% static 'images/Logo-Biblioteca.png' %}{% endif %}" 
+                class="card-img-top img-fluid w-50 d-block mx-auto mt-3" 
+                alt="Imagen de {{ material.titulo }}">
+              <div class="card-body">
+                    <h5 class="card-title">{{ material.titulo }}</h5>
+                    <p class="card-text">Autor: {{ material.autor }}</p>
+                 
+                    <p class="card-text">Tipo: {{ material.get_tipo }}</p>
+                    <a href="#" class="btn btn-primary"> <i class="bi bi-cart-plus"></i> Agregar Carrito</a>
+                    <a href="#" class="btn btn-secondary"> <i class="bi bi-heart"></i> Favoritos</a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p class="text-center">Por el momento no contamos con libros.</p>
+    {% endfor %}
+</div>
+
+<!-- Paginación -->
+<nav>
+    <ul class="pagination justify-content-center">
+        {% if materiales.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page=1">&laquo; Primero</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ materiales.previous_page_number }}">Anterior</a></li>
+        {% endif %}
+        
+        <li class="page-item disabled"><a class="page-link">Página {{ materiales.number }} de {{ materiales.paginator.num_pages }}</a></li>
+        
+        {% if materiales.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ materiales.next_page_number }}">Siguiente</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ materiales.paginator.num_pages }}">Último &raquo;</a></li>
+        {% endif %}
+    </ul>
+</nav>
+{% endblock %}

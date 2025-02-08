@@ -1,0 +1,53 @@
+<div class="modal fade" id="editar_material" tabindex="-1" aria-labelledby="editarMaterialLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editarMaterialLabel">Editar Material</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formEditarMaterial" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" id="edit_id" name="id">
+                    
+                    <div class="mb-3">
+                        <label for="edit_titulo" class="form-label">Título</label>
+                        <input type="text" class="form-control" id="edit_titulo" name="titulo" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_autor" class="form-label">Autor</label>
+                        <input type="text" class="form-control" id="edit_autor" name="autor" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_editorial" class="form-label">Editorial</label>
+                        <input type="text" class="form-control" id="edit_editorial" name="editorial" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_genero" class="form-label">Genero</label>
+                        <input type="text" class="form-control" id="edit_genero" name="genero" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_tipo" class="form-label">Tipo</label>
+                        <select class="form-select" id="edit_tipo" name="tipo" required>
+                            <option value="L">Libro</option>
+                            <option value="R">Revista</option>
+                            <option value="T">Tesis</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_fecha" class="form-label">Fecha de Publicación</label>
+                        <input type="date" class="form-control" id="edit_fecha" name="fecha" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_foto" class="form-label">Foto</label>
+                        <input type="file" class="form-control" id="edit_foto" name="foto">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="guardarEdicion">Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
+</div>

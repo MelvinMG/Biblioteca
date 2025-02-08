@@ -1,0 +1,95 @@
+/* Fondo de pantalla completo */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Akaya Telivigala", system-ui, sans-serif;
+    font-style: normal;
+    background: linear-gradient(135deg, #74b9ff, #81ecec);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Contenedor del formulario de login */
+.container-login {
+    width: 100%;
+    max-width: 450px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+/* Header de login */
+.container-login h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #2d3436;
+}
+
+/* Botones */
+button {
+    background-color: #0984e3;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+    transition: 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #74b9ff;
+}
+
+button a {
+    color: white;
+    text-decoration: none;
+}
+
+button a:hover {
+    text-decoration: underline;
+}
+
+/* Estilo para los campos de formulario */
+.form-control {
+    border-radius: 15px;
+
+    height: 40px;
+}
+
+/* Ícono de mostrar/ocultar contraseña */
+
+.input-group-text {
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+
+.btn-primary {
+    background-color: #0984e3;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+    transition: 0.3s ease-in-out;
+}
+
+ 
+
+
+.btn-primary:hover {
+    background-color: #74b9ff;
+}
+
